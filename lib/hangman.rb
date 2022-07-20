@@ -1,7 +1,7 @@
 require 'yaml'
 
 class Game
-  
+  attr_accessor :answer, :correct_guesses, :tries, :string_answer
   def initialize 
   @answer = []
   @correct_guesses = []
@@ -90,12 +90,9 @@ class Game
       @correct_guesses.push('_')
     end
     @answer = @string_answer.split(//)
+    game_loop
   end
-
 end
-
-
 
 new_game = Game.new
 new_game.start_game
-new_game.game_loop
