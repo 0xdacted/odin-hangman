@@ -33,9 +33,14 @@ class Human < Player
 
   def check_guess
     if @@answer.include?(@user_guess)
-     index = @@answer.index(@user_guess)
-     @@correct_guesses[index] = @user_guess
-     p @@correct_guesses
+        @@answer.each_with_index do |element, index|
+        if element == @user_guess
+        @@correct_guesses[index] = @user_guess
+        p @@correct_guesses
+        else
+          next
+        end
+      end
     end
   end
 end
