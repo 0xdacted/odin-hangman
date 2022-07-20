@@ -1,6 +1,8 @@
 class Player
   @@answer = []
   @@correct_guesses = []
+  @@i = 20
+  @@string_answer = ''
 end
 
 class Computer < Player
@@ -11,12 +13,12 @@ class Computer < Player
     lines.each do |line|
       possible_words.push(line) if line.length >= 5 && line.length <= 13
     end
-    string_answer = possible_words.sample.gsub("\n", '')
-    string_answer.length.times do
+    @@string_answer = possible_words.sample.gsub("\n", '')
+    @@string_answer.length.times do
       @@correct_guesses.push('_')
     end
     p @@correct_guesses
-    p @@answer = string_answer.split(//)
+    p @@answer = @@string_answer.split(//)
   end
 end
 
@@ -41,6 +43,21 @@ class Human < Player
           next
         end
       end
+      @@i -= 1
+      p "Congratulations! #{@user_guess} is included in the given word. You have #{@@i} tries left"
+    else
+      @@i -= 1
+      p "Sorry! #{@user_guess} is not included in the given word. You have #{@@i} tries left"
+    end
+  end
+
+  def start_game
+    until @@i == 0 
+      guess
+      if @@correct_guesses == @@answer
+        p "Great job! You have successfully guessed the entire word: #{@@string_answer}. You win!"
+        break
+      end
     end
   end
 end
@@ -48,6 +65,6 @@ end
 computer_player = Computer.new
 human_player = Human.new
 computer_player.start_game
-human_player.guess
+human_player.start_game
 
 
