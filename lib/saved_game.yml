@@ -1,0 +1,19 @@
+---
+- !ruby/object:Game
+  answer:
+  - d
+  - a
+  - m
+  - a
+  - g
+  - e
+  correct_guesses:
+  - _
+  - a
+  - _
+  - a
+  - _
+  - _
+  tries: 14
+  string_answer: damage
+  user_guess: 'yes'
