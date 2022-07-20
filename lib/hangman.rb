@@ -1,11 +1,11 @@
-class Player
+class Game
   @@answer = []
   @@correct_guesses = []
-  @@i = 15
+  @@tries = 15
   @@string_answer = ''
 end
 
-class Computer < Player
+class Computer < Game
   def start_game
     possible_words = []
     puts 'Hangman initialized'
@@ -17,12 +17,11 @@ class Computer < Player
     @@string_answer.length.times do
       @@correct_guesses.push('_')
     end
-    p @@correct_guesses
-    p @@answer = @@string_answer.split(//)
+    @@answer = @@string_answer.split(//)
   end
 end
 
-class Human < Player
+class Human < Game
   def guess
     p "given #{@@correct_guesses}, please input your single character guess and press enter"
     @user_guess = gets.chomp.downcase
@@ -35,26 +34,26 @@ class Human < Player
 
   def check_guess
     if @@answer.include?(@user_guess)
-        @@answer.each_with_index do |element, index|
+      @@answer.each_with_index do |element, index|
         if element == @user_guess
-        @@correct_guesses[index] = @user_guess
-        p @@correct_guesses
+          @@correct_guesses[index] = @user_guess
+          p @@correct_guesses
         else
           next
         end
       end
-      @@i -= 1
-      p "Congratulations! #{@user_guess} is included in the given word. You have #{@@i} tries left"
+      @@tries -= 1
+      p "Congratulations! #{@user_guess} is included in the given word. You have #{@@tries} tries left"
     else
-      @@i -= 1
-      p "Sorry! #{@user_guess} is not included in the given word. You have #{@@i} tries left"
+      @@tries -= 1
+      p "Sorry! #{@user_guess} is not included in the given word. You have #{@@tries} tries left"
     end
   end
 
   def start_game
-    until @@i == -1 
-      if @@i == 0
-        p "You have #{@@i} guesses left, you have lost. Please restart the game if you would like to try again!"
+    until @@tries == -1
+      if @@tries == 0
+        p "You have #{@@tries} guesses left, you have lost. Please restart the game if you would like to try again!"
         break
       end
       guess
@@ -70,5 +69,3 @@ computer_player = Computer.new
 human_player = Human.new
 computer_player.start_game
 human_player.start_game
-
-
