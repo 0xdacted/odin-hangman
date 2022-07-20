@@ -33,8 +33,9 @@ class Human < Player
 
   def check_guess
     if @@answer.include?(@user_guess)
-      @@correct_guesses.push(@user_guess)
-      p @@correct_guesses
+     index = @@answer.index(@user_guess)
+     @@correct_guesses[index] = @user_guess
+     p @@correct_guesses
     end
   end
 end
