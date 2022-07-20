@@ -1,7 +1,7 @@
 require 'yaml'
 
 class Game
-  attr_accessor :answer, :correct_guesses, :tries, :string_answer
+  attr_reader :answer, :correct_guesses, :tries, :string_answer
   def initialize 
   @answer = []
   @correct_guesses = []
