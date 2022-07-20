@@ -1,7 +1,7 @@
 class Player
   @@answer = []
   @@correct_guesses = []
-  @@i = 20
+  @@i = 15
   @@string_answer = ''
 end
 
@@ -52,7 +52,11 @@ class Human < Player
   end
 
   def start_game
-    until @@i == 0 
+    until @@i == -1 
+      if @@i == 0
+        p "You have #{@@i} guesses left, you have lost. Please restart the game if you would like to try again!"
+        break
+      end
       guess
       if @@correct_guesses == @@answer
         p "Great job! You have successfully guessed the entire word: #{@@string_answer}. You win!"
